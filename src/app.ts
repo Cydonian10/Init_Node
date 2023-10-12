@@ -1,3 +1,4 @@
+import { Database } from "./config/data-source";
 import { AppRoutes } from "./presentation/routes";
 import { NodeServer } from "./presentation/server";
 
@@ -6,9 +7,12 @@ import { NodeServer } from "./presentation/server";
 })();
 
 async function main() {
-  // todo : await base de datos
-  // code
-  // todo: inicio de nustro server
+  await Database.connect({
+    type: "sqlite",
+    database: "db.sql",
+    entities: [],
+    synchronize: true,
+  });
 
   new NodeServer({
     port: 3000,
